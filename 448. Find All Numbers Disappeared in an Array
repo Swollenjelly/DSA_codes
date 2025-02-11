@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int n = nums.length;
+
+
+        Set<Integer> completeSet = new HashSet<>();
+        for (int i = 1; i <= n; i++) {
+            completeSet.add(i);
+        }
+
+     
+        for (int num : nums) {
+            completeSet.remove(num);
+        }
+
+       
+        return new ArrayList<>(completeSet);
+    }
+}
