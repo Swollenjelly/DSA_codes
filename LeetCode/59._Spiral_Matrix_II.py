@@ -1,36 +1,42 @@
 class Solution {
-    public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
+    public int[][] generateMatrix(int n) {
+         int[][] matrix = new int[n][n]; // Create an n x n matrix filled with 0s
+        int num = 1; // The number to fill in the matrix
 
-        if(matrix == null || matrix.length == 0) return result;
+        int top = 0, bottom = n - 1;
+        int left = 0, right = n - 1;
 
-        int top = 0, bottom = matrix.length - 1;
-        int left = 0, right = matrix[0].length - 1;
-
-        while(top <= bottom && left <= right){
-            for(int i = left; i<= right; i++){
-                result.add(matrix[top][i]);
+        while (num <= n * n) {
+            // Traverse from left to right
+            for (int i = left; i <= right; i++) {
+                matrix[top][i] = num++;
             }
-            top++;
+            top++; // Move top boundary down
 
-            for(int i = top; i <= bottom; i++){
-                result.add(matrix[i][right]);
+            // Traverse from top to bottom
+            for (int i = top; i <= bottom; i++) {
+                matrix[i][right] = num++;
             }
-            right--;
+            right--; // Move right boundary left
 
-            if(top<=bottom){
-                for(int i = right; i>=left; i--){
-                    result.add(matrix[bottom][i]);
+            // Traverse from right to left
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    matrix[bottom][i] = num++;
                 }
-                bottom--;
+                bottom--; // Move bottom boundary up
             }
-            if(left<=right){
-                for(int i = bottom; i>=top; i--){
-                    result.add(matrix[i][left]);
+
+            // Traverse from bottom to top
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    matrix[i][left] = num++;
                 }
-                left++;
+                left++; // Move left boundary right
             }
         }
-        return result;
+
+        return matrix;
     }
-}
+        
+    }
